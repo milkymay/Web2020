@@ -105,63 +105,124 @@ main {
     font-size: 0.88rem;
 }
 
-main .title {
-    font-size: 1.25rem;
+main .login-form-box {
+    position: relative;
+    width: 28rem;
+    height: 15rem;
+    margin: 0 auto;
+    border: 1px solid var(--border-color);
+    border-top-left-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
+    text-align: right;
+    display: table;
+}
+
+main .header {
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
     font-weight: bold;
-    color: #3B5998;
+    font-size: 1rem;
+    color: var(--caption-color);
+    padding: 0.2rem 0.2rem 0.2rem 0.4rem;
 }
 
-main .information {
-    font-size: 0.86rem;
-    color: #888888;
+main .field {
+    position: relative;
+    display: inline-block;
 }
 
-main .body {
-    border-left: 0.3rem solid #AAAAAA;
-    padding-left: 1rem;
+main .field .value  {
+    padding: 1.2rem 2.5rem 0 0.4rem;
+    display: inline-table;
 }
 
-main ul {
-    list-style-type: none;
-    padding: 0 0 0.35rem 0;
+main .field .value input {
+    padding: 0.1rem 0 0.1rem 2.2rem;
+    border: 1px solid var(--border-color);
+    display: inline-table;
+}
+
+main .field .name {
+    padding: 1.2rem 0 0 0.4rem;
+    display: inline-table;
+    vertical-align: top;
+}
+
+main .field .error {
+    position: absolute;
+    top: 2.6rem;
+    left: 5.25rem;
+    color: #FF004F;
+    font-size: 0.6rem;
+    margin-right: 3rem;
+    text-align: center;
+}
+
+main .checkbox-field {
+    position: absolute;
+    top: 9rem;
+    left: 11rem;
+    font-size: 0.6rem;
+}
+
+main .checkbox-field input {
+    visibility:hidden;
+}
+
+main .checkbox-field input[type="checkbox"] + label:before {
+    border: 0.07rem solid #AAAAAA;
+    content: "\00a0";
+    display: inline-block;
+    height: 0.5rem;
+    margin: 0 0.2rem 0 0;
+    border-radius: 2px;
+    width: 0.5rem;
+    background-image : linear-gradient(180deg, rgb(250,250,250) 2%, rgb(220,220,220) 40%);
+}
+
+main .checkbox-field input[type="checkbox"]:checked + label:before {
+    color: white;
+    background-color: blue;
+    content: "\2714";
+    /*text-align: center;*/
+}
+
+main .button-field {
+    position: absolute;
+    top: 11.5rem;
+    left: 12rem;
+    /*padding: 0.2rem 0 0.2rem 0.2rem;*/
+    /*text-align: center;*/
+}
+
+main .button-field input {
+    padding: 0.1rem 1rem 0.05rem 1rem;
     font-size: 0.8rem;
-    color: #888888;
+    background-image : linear-gradient(180deg, rgb(250,250,250) 7%, rgb(235,235,235) 40%);
+    border: 0.07rem solid #888888;
 }
 
-main li {
-    background: url(https://sta.codeforces.com/s/38932/images/icons/paperclip-16x16.png) 0 0 no-repeat;
-    background-size: 0.9rem;
-    padding-left: 1.2rem;
-    margin-top: 0.3rem;
+main .links {
+    position: absolute;
+    bottom: 1.1rem;
+    right: 0;
+    font-size: 0.6rem;
+    padding: 0.2rem 0.3rem 0.2rem 0.4rem;
+    text-align: right;
 }
 
 main .footer {
-    height: 2.2rem;
-    border: 0.08rem solid #BBBBBB;
-    border-radius: var(--border-radius);
-    width: inherit;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: 0.6rem;
+    width: 100%;
+    border-top: 1px solid var(--border-color);
+    padding: 0.2rem 0 0.2rem 0;
 }
 
-main .footer div{
-    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
-    vertical-align: middle;
-}
-
-main .footer div img {
-    vertical-align: middle;
-    size: 1rem;
-    padding: 0 0.1rem 0 0.1rem;
-}
-
-main .footer .left {
-    float: left;
-    font-size: 1rem;
-    color: #008000;
-    font-weight: bold;
-}
-
-main .footer .right {
-    float: right;
+main .footer a {
+    padding-right: 0.4rem;
 }
 
 footer {
