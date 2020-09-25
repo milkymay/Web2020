@@ -142,15 +142,9 @@ main .footer {
     width: inherit;
 }
 
-main .footer div{
+main .footer div {
     padding: 0.5rem 0.5rem 0.5rem 0.5rem;
     vertical-align: middle;
-}
-
-main .footer div img {
-    vertical-align: middle;
-    size: 1rem;
-    padding: 0 0.1rem 0 0.1rem;
 }
 
 main .footer .left {
@@ -160,8 +154,19 @@ main .footer .left {
     font-weight: bold;
 }
 
+main .footer .left img {
+    vertical-align: middle;
+    height: 1.3rem;
+}
+
 main .footer .right {
     float: right;
+}
+
+main .footer .right img {
+    vertical-align: top;
+    size: 1rem;
+    padding: 0 0.1rem 0.0rem 0.1rem;
 }
 
 footer {
