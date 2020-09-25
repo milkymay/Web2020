@@ -161,12 +161,16 @@ main .field .error {
 main .checkbox-field {
     position: absolute;
     top: 9rem;
-    left: 11rem;
-    font-size: 0.6rem;
+    left: 11.75rem;
+    font-size: 0.65rem;
 }
 
 main .checkbox-field input {
     visibility:hidden;
+    opacity: 0;
+    position: absolute;
+    height: 0;
+    width: 0;
 }
 
 main .checkbox-field input[type="checkbox"] + label:before {
@@ -184,13 +188,13 @@ main .checkbox-field input[type="checkbox"]:checked + label:before {
     color: white;
     background-color: blue;
     content: "\2714";
-    /*text-align: center;*/
+    text-align: center;
 }
 
 main .button-field {
     position: absolute;
     top: 11.5rem;
-    left: 12rem;
+    left: 11.8rem;
     /*padding: 0.2rem 0 0.2rem 0.2rem;*/
     /*text-align: center;*/
 }
