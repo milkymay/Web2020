@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.nio.file.Files;
 
 public class StaticServlet extends HttpServlet {
@@ -13,23 +12,21 @@ public class StaticServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String uri = request.getRequestURI();
         String[] uris = uri.split("[+]");
-        OutputStream outputStream = response.getOutputStream();
         for (int i = 0; i < uris.length; i++) {
-            File file = new File("C:\\wp3\\src\\main\\webapp\\static\\" + uris[i]);
+            File file = new File("C:\\wp3\\src\\main\\webapp\\static\\", uris[i]);
             if (!file.isFile()) {
-                file = new File(getServletContext().getRealPath("/static" + uris[i]));
+                file = new File(getServletContext().getRealPath("/static"), uris[i]);
             }
             if (file.isFile()) {
-                if (i == 0) response.setContentType(getContentTypeFromName(uris[0]));
-                Files.copy(file.toPath(), outputStream);
+                if (i == 0) {
+                    response.setContentType(getContentTypeFromName(uris[0]));
+                }
+                Files.copy(file.toPath(), response.getOutputStream());
             } else {
                 response.sendError(HttpServletResponse.SC_NOT_FOUND);
-                break;
             }
         }
-        outputStream.flush();
     }
-
 
     private String getContentTypeFromName(String name) {
         name = name.toLowerCase();
