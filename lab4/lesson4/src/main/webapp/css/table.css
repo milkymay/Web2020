@@ -1,0 +1,18 @@
+.user {
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 0.1rem 0.5rem;
+    background: url(https://userpic.codeforces.com/no-title.jpg) no-repeat right bottom 50%;
+    background-size: 7rem;
+}
+
+.user .name a {
+    font-size: 1.8rem;
+}
+
+.arrow {
+    font-size: 1.5rem;
+    color: blue;
+    text-decoration: none;
+
+}
