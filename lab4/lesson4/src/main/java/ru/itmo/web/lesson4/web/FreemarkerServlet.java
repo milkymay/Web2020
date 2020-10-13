@@ -13,6 +13,8 @@ import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
+import java.lang.Object;
+
 
 public class FreemarkerServlet extends HttpServlet {
     private static final String UTF_8 = StandardCharsets.UTF_8.name();
@@ -64,6 +66,11 @@ public class FreemarkerServlet extends HttpServlet {
         Map<String, Object> data = new HashMap<>();
 
         for (Map.Entry<String, String[]> e : request.getParameterMap().entrySet()) {
+//            if (e.getValue() != null && e.getValue()[0].endsWith("_id")) {
+//                try {
+//                    long num = Integer.getInteger(e.getKey())
+//                }
+//            }
             if (e.getValue() != null && e.getValue().length == 1) {
                 data.put(e.getKey(), e.getValue()[0]);
             }

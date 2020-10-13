@@ -109,3 +109,27 @@
         </#if>
     </#list>
 </#function>
+
+<#function findNext items key value>
+    <#assign found = false/>
+    <#list items as item>
+        <#if found>
+            <#return item/>
+        </#if>
+        <#if item[key] == value>
+            <#assign found = true/>
+        </#if>
+    </#list>
+</#function>
+
+<#function findPrev items key value>
+    <#assign last = false/>
+    <#assign notTheFirst = false/>
+    <#list items as item>
+        <#if item[key] == value && notTheFirst>
+            <#return last/>
+        </#if>
+        <#assign last = item/>
+        <#assign notTheFirst = true/>
+    </#list>
+</#function>

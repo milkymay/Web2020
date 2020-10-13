@@ -2,7 +2,9 @@
 <#import "./common.ftlh" as c>
 
 <@c.page>
-    <#assign u = c.findBy(users, "handle", handle)!/>
+    <#assign u = c.findBy(users, "handle", handle)!,
+    next = c.findNext(users, "handle", handle)!,
+    prev = c.findPrev(users, "handle", handle)!/>
 
     <#if u?has_content>
         <div class="user">
@@ -23,9 +25,17 @@
             </ul>
         </div>
         <div class="navigation">
-            <a href="/ser?handle?" class="arrow">←</a>
-            <a href="/ser?handle?" class="arrow">→</a>
+            <#if prev?has_content> <a href="/user?handle=${prev.handle}" class="arrow">←</a>
+                <#else> <a class="arrow" style="color: grey" >←</a> </#if>
+            <#if next?has_content> <a href="/user?handle=${next.handle}" class="arrow">→</a>
+                <#else> <a class="arrow" style="color: grey">→</a> </#if>
         </div>
+<#--        <#list users as u>-->
+<#--            <li>-->
+<#--                <#if user?? && user.id == u.id>*</#if>-->
+<#--                <@c.userlink u/>-->
+<#--            </li>-->
+<#--        </#list>-->
     <#else>
         No such user
     </#if>
