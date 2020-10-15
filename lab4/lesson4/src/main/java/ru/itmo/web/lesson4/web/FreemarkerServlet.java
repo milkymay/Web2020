@@ -47,8 +47,13 @@ public class FreemarkerServlet extends HttpServlet {
         try {
             template = cfg.getTemplate(URLDecoder.decode(request.getRequestURI(), UTF_8) + ".ftlh");
         } catch (TemplateNotFoundException ignored) {
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-            return;
+            if (URLDecoder.decode(request.getRequestURI(), UTF_8).equals("/")) {
+                response.sendRedirect("/index");
+                return;
+            } else {
+                response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                template = cfg.getTemplate("/404.ftlh");
+            }
         }
 
         Map<String, Object> data = getData(request);
@@ -66,16 +71,18 @@ public class FreemarkerServlet extends HttpServlet {
         Map<String, Object> data = new HashMap<>();
 
         for (Map.Entry<String, String[]> e : request.getParameterMap().entrySet()) {
-//            if (e.getValue() != null && e.getValue()[0].endsWith("_id")) {
-//                try {
-//                    long num = Integer.getInteger(e.getKey())
-//                }
-//            }
             if (e.getValue() != null && e.getValue().length == 1) {
-                data.put(e.getKey(), e.getValue()[0]);
+                if (e.getKey().endsWith("_id")) {
+                    try {
+                        data.put(e.getKey(), Long.parseLong(e.getValue()[0]));
+                    } catch (NumberFormatException exc) {
+                        data.put(e.getKey(), e.getValue()[0]);
+                    }
+                } else {
+                    data.put(e.getKey(), e.getValue()[0]);
+                }
             }
         }
-
         DataUtil.addData(request, data);
         return data;
     }

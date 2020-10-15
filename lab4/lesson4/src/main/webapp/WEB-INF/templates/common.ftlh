@@ -6,7 +6,6 @@
         <title>Codeforces</title>
         <link rel="stylesheet" href="/css/normalize.css">
         <link rel="stylesheet" href="/css/style.css">
-        <link rel="stylesheet" href="/css/table.css">
         <link rel="icon" href="/favicon.ico">
     </head>
     <body>
@@ -34,7 +33,7 @@
         </div>
         <div class="enter-or-register-box">
             <#if user??>
-                <@userlink user/>
+                <@userlink user true/>
                 |
                 <a href="/logout">Logout</a>
             <#else>
@@ -47,12 +46,18 @@
             <#assign items=[
             {"href": "/index", "name": "Home"},
             {"href": "/misc/help", "name": "Help"},
-            {"href": "/contests", "name": "Contests"}
+            {"href": "/contests", "name": "Contests"},
+            {"href": "/users", "name": "Users"}
             ]/>
             <ul>
                 <#list items as item>
                     <li>
-                        <a href="${item.href}">${item.name}</a>
+                        <#if menu?? && menu == item.href>
+                            <a href="${item.href}" class="current">${item.name}</a>
+                            <#else>
+                                <a href="${item.href}">${item.name}</a>
+                        </#if>
+
                     </li>
                 </#list>
             </ul>
@@ -62,33 +67,15 @@
 
 <#macro sidebar>
     <aside>
+    <#list posts?reverse as post>
         <section>
-            <div class="header">Information</div>
-            <div class="body">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores enim expedita facilis
-                fugiat ipsum iste nobis reprehenderit tempore ut voluptatibus?
-            </div>
+            <div class="header">Post #${post.id}</div>
+            <div class="body"><@post_text post true/></div>
             <div class="footer">
-                <a href="#">View all</a>
+                <a href="/post?post_id=${post.id}">View all</a>
             </div>
         </section>
-        <section>
-            <div class="header">Information</div>
-            <div class="body">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores enim expedita facilis
-                fugiat ipsum iste nobis reprehenderit tempore ut voluptatibus?
-            </div>
-            <div class="footer">
-                <a href="#">View all</a>
-            </div>
-        </section>
-        <section>
-            <div class="header">Information</div>
-            <div class="body">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores enim expedita facilis
-                fugiat ipsum iste nobis reprehenderit tempore ut voluptatibus?
-            </div>
-            <div class="footer">
-                <a href="#">View all</a>
-            </div>
-        </section>
+    </#list>
     </aside>
 </#macro>
 
@@ -98,8 +85,32 @@
     </footer>
 </#macro>
 
-<#macro userlink user>
-    <a href="/user?handle=${user.handle}">${user.name}</a>
+<#macro userlink user nameOnly = false>
+    <#if nameOnly>
+        <a href="/user?handle=${user.handle}">${user.handle}</a>
+    <#else>
+        <a style="font-weight: bold; text-decoration: none; color: ${user.color}" href="/user?handle=${user.handle}">${user.handle}</a>
+    </#if>
+</#macro>
+
+<#macro post_text post cut>
+    <#if cut && post.text?length &gt; 250>
+        <#assign text = post.text[0..250]+"...">
+    <#else>
+        <#assign text = post.text>
+    </#if>
+    ${text}
+</#macro>
+
+<#macro display_post post cut>
+    <#assign user = findBy(users, "id", post.user_id)>
+    <article>
+        <div class="title">${post.title} #${post.id}</div>
+        <div class="information">By <@userlink user/></div>
+        <div class="body">
+            <@post_text post cut/>
+        </div>
+    </article>
 </#macro>
 
 <#function findBy items key value>
@@ -111,25 +122,17 @@
 </#function>
 
 <#function findNext items key value>
-    <#assign found = false/>
     <#list items as item>
-        <#if found>
-            <#return item/>
-        </#if>
         <#if item[key] == value>
-            <#assign found = true/>
+            <#return items[item?index + 1]/>
         </#if>
     </#list>
 </#function>
 
 <#function findPrev items key value>
-    <#assign last = false/>
-    <#assign notTheFirst = false/>
     <#list items as item>
-        <#if item[key] == value && notTheFirst>
-            <#return last/>
+        <#if item[key] == value>
+            <#return items[item?index - 1]/>
         </#if>
-        <#assign last = item/>
-        <#assign notTheFirst = true/>
     </#list>
 </#function>

@@ -1,20 +1,16 @@
 package ru.itmo.web.lesson4.model;
 
-import ru.itmo.web.lesson4.util.DataUtil;
-
 public class User {
     private final long id;
     private final String handle;
     private final String name;
-//    private final User next;
-//    private final User prev;
+    private final UserColor color;
 
-    public User(long id, String handle, String name/*, User prev, User next*/) {
+    public User(long id, String handle, String name, UserColor color) {
         this.id = id;
         this.handle = handle;
         this.name = name;
-//        this.next = DataUtil.getNext(this);
-//        this.prev = DataUtil.getPrev(this);
+        this.color = color;
     }
 
     public long getId() {
@@ -29,7 +25,7 @@ public class User {
         return name;
     }
 
-//    public User getNext() { return next; }
-//
-//    public User getPrev() { return prev; }
+    public UserColor getColor() {
+        return color;
+    }
 }

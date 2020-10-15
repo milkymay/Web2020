@@ -2,7 +2,7 @@
     font-size: 16px;
     font-family: Verdana, sans-serif;
     color: rgb(34, 34, 34);
-
+    --table-border-color: #E1E1E1;
     --border-color: rgb(185, 185, 185);
     --boder: 1px solid var(--border-color);
     --border-radius: 6px;
@@ -19,6 +19,7 @@ html {
 header {
     position: relative;
 }
+
 
 header .languages {
     position: absolute;
@@ -103,6 +104,83 @@ aside section .footer a:after {
 
 main {
     margin-right: 21rem;
+}
+
+main article {
+    margin-bottom: 1rem;
+}
+
+main .title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #3B5998;
+}
+
+main .information {
+    font-size: 0.86rem;
+    color: #888888;
+}
+
+main .body {
+    border-left: 0.3rem solid #AAAAAA;
+    padding-left: 1rem;
+}
+
+main .datatable {
+    border-collapse: collapse;
+}
+main .datatable .caption {
+    background-color: var(--table-border-color);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    padding: 0.2rem 0.4rem 0.2rem 0.4rem;
+    font-size: 0.9rem;
+}
+
+main .datatable table {
+    border-collapse: collapse;
+    border: 1px solid var(--table-border-color);
+    width: 100%;
+}
+
+main .datatable th, td, tr {
+    border-collapse: collapse;
+    border: 1px solid var(--table-border-color);
+    text-align: center;
+    height: 1.53rem;
+    font-size: 0.73rem;
+}
+
+main .datatable table tbody :nth-child(2n-1) :nth-child(n) {
+    background-color: #F8F8F8;
+}
+
+.user {
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 0.1rem 0.5rem;
+    background: url(https://userpic.codeforces.com/no-title.jpg) no-repeat right bottom 50%;
+    background-size: 7rem;
+}
+
+.user .name a {
+    font-size: 1.8rem;
+}
+
+.arrowActive {
+    font-size: 1.5rem;
+    color: blue;
+    text-decoration: none;
+}
+
+.arrowPassive {
+    font-size: 1.5rem;
+    color: grey;
+    text-decoration: none;
+}
+
+.current {
+    border-bottom: 0.15rem cornflowerblue solid;
 }
 
 footer {
