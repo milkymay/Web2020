@@ -1,5 +1,6 @@
 package ru.itmo.wp.web.page;
 
+import ru.itmo.wp.model.TicTacToe.*;
 import ru.itmo.wp.web.exception.RedirectException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +23,7 @@ public class TicTacToePage {
 
     private void onMove(Map<String, Object> view, HttpServletRequest request) {
         State curState = (State) request.getSession().getAttribute("state");
-        if (curState.phase == State.Phase.RUNNING) {
+        if (curState.board.getPhase() == Phase.RUNNING) {
             int x = -1, y = -1;
             for (String name : request.getParameterMap().keySet()) {
                 if (name.startsWith("cell")) {
@@ -38,77 +39,35 @@ public class TicTacToePage {
     }
 
     public static class State {
+        private Board board;
         private final int size = 3;
-        private int cnt = 0;
-        private final Cell[][] cells;
-        private Phase phase;
-        private boolean crossesMove;
 
         public State() {
-            this.cells = new Cell[size][size];
-            this.phase = Phase.RUNNING;
-            this.crossesMove = true;
+            this.board = new Board(size);
         }
 
         public void makeMove(int x, int y) {
-            cnt++;
-            if (cells[x][y] == null) {
-                cells[x][y] = lastCell();
-                stateCheck();
-                crossesMove = !crossesMove;
-            }
+            board.makeMove(x, y);
         }
-
-        private void stateCheck() {
-            if (lineCheck()) {
-                phase = crossesMove ? Phase.WON_X : Phase.WON_O;
-            } else if (cnt == size * size) {
-                phase = Phase.DRAW;
-            }
-        }
-        
-        private boolean lineCheck() {
-            for (int i = 0; i < 3; i++) {
-                if (cells[i][0] != null && cells[i][0] == cells[i][1] && cells[i][1] == cells[i][2] ||
-                    cells[0][i] != null && cells[0][i] == cells[1][i] && cells[1][i] == cells[2][i]) {
-                    return true;
-                }
-            }
-            return cells[0][0] != null && cells[0][0] == cells[1][1] && cells[1][1] == cells[2][2] ||
-                   cells[0][2] != null && cells[0][2] == cells[1][1] && cells[1][1] == cells[2][0];
-        }
-
-        private Cell lastCell() {
-            return crossesMove ? Cell.X : Cell.O;
-        }
-
-        private enum Cell {
-            X, O
-        }
-
-        private enum Phase {
-            WON_O, WON_X, DRAW, RUNNING
-        }
-
 
         public int getSize() {
             return size;
         }
 
         public int getCnt() {
-            return cnt;
+            return board.getCnt();
         }
 
         public Cell[][] getCells() {
-            return cells;
+            return board.getCells();
         }
 
         public Phase getPhase() {
-            return phase;
+            return board.getPhase();
         }
 
         public boolean getCrossesMove() {
-            return crossesMove;
+            return board.getCrossesMove();
         }
     }
 }

@@ -43,6 +43,7 @@ public class FrontServlet extends HttpServlet {
                 TemplateExceptionHandler.RETHROW_HANDLER);
         configuration.setLogTemplateExceptions(false);
         configuration.setWrapUncheckedExceptions(true);
+        configuration.setLocale(Locale.ENGLISH);
 
         return configuration;
     }
@@ -66,10 +67,6 @@ public class FrontServlet extends HttpServlet {
 
     private void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Route route = Route.newRoute(request);
-        String lg = request.getParameter("lang");
-        if (lg != null && !lg.equals("en") && lg.matches("[a-z]{2}")) {
-            request.getSession().setAttribute("lang", lg);
-        }
         try {
             process(route, request, response);
         } catch (NotFoundException e) {
@@ -95,8 +92,21 @@ public class FrontServlet extends HttpServlet {
                     .filter(part -> part.getName().equals(route.getAction()))
                     .collect(Collectors.toList());
 
+
             if (methods.size() != 0) {
-                method = methods.get(0);
+                for (Method m : methods) {
+                    boolean found = true;
+                    for (Class<?> e : m.getParameterTypes()) {
+                        if (e != Map.class && e != HttpServletRequest.class) {
+                            found = false;
+                            break;
+                        }
+                    }
+                    if (found) {
+                        method = m;
+                        break;
+                    }
+                }
             }
         }
 
@@ -138,11 +148,13 @@ public class FrontServlet extends HttpServlet {
         }
 
 
+
         Template template;
         response.setContentType("text/html");
         response.setCharacterEncoding(StandardCharsets.UTF_8.name());
 
-        String lg = (String) request.getSession().getAttribute("lang");
+        String lg = setLanguage(request);
+
         if (lg != null) {
             try {
                 template = newTemplate(pageClass.getSimpleName() + "_" + lg + ".ftlh");
@@ -158,6 +170,20 @@ public class FrontServlet extends HttpServlet {
         } catch (TemplateException e) {
             throw new ServletException("Can't render template [pageClass=" + pageClass + ", action=" + method + "]", e);
         }
+    }
+
+    private String setLanguage(HttpServletRequest request) {
+        String lg = request.getParameter("lang");
+        if (lg != null) {
+            if (lg.equals("en")) {
+                request.getSession().removeAttribute("lang");
+            } else if (lg.matches("[a-z]{2}")) {
+                request.getSession().setAttribute("lang", lg);
+            }
+        }  else {
+            lg = (String) request.getSession().getAttribute("lang");
+        }
+        return lg;
     }
 
     private Template newTemplate(String templateName) throws ServletException {
