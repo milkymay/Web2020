@@ -11,10 +11,10 @@
                 <input type="hidden" name="action" value="enter"/>
                 <div class="field">
                     <div class="name">
-                        <label for="login">Login</label>
+                        <label for="loginOrEmail">Login or email</label>
                     </div>
                     <div class="value">
-                        <input id="login" name="login" value="${login!}"/>
+                        <input id="loginOrEmail" name="loginOrEmail" value="${login!}"/>
                     </div>
                 </div>
                 <div class="field">

@@ -18,9 +18,8 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class FrontServlet extends HttpServlet {
     private static final String BASE_PAGE_PACKAGE = FrontServlet.class.getName().substring(
@@ -121,20 +120,6 @@ public class FrontServlet extends HttpServlet {
         } catch (ClassNotFoundException e) {
             throw new NotFoundException();
         }
-
-        Method method = null;
-        for (Class<?> clazz = pageClass; method == null && clazz != null; clazz = clazz.getSuperclass()) {
-            try {
-                method = pageClass.getDeclaredMethod(route.getAction(), HttpServletRequest.class, Map.class);
-            } catch (NoSuchMethodException ignored) {
-                // No operations.
-            }
-        }
-
-        if (method == null) {
-            throw new NotFoundException();
-        }
-
         Object page;
         try {
             page = pageClass.newInstance();
@@ -142,20 +127,78 @@ public class FrontServlet extends HttpServlet {
             throw new ServletException("Can't create page [pageClass=" + pageClass + "].", e);
         }
 
+        Method method = findMethod(route.getAction(), pageClass);
         Map<String, Object> view = new HashMap<>();
-        putUser(request, view);
-
         try {
-            method.setAccessible(true);
-            method.invoke(page, request, view);
+            invokeMethod("before", page, view, request);
+            invokeMethod(route.getAction(), page, view, request);
+            invokeMethod("after", page, view, request);
+        } catch (RedirectException e) {
+            response.sendRedirect(e.getLocation());
+            return;
+        }
+        Template template = newTemplate(pageClass.getSimpleName() + ".ftlh");
+
+        response.setContentType("text/html");
+        response.setCharacterEncoding(StandardCharsets.UTF_8.name());
+        try {
+            template.process(view, response.getWriter());
+        } catch (TemplateException e) {
+            throw new ServletException("Can't render template [pageClass=" + pageClass + ", method=" + method + "].", e);
+        }
+    }
+
+    private Method findMethod(String action, Class<?> pageClass) throws NotFoundException {
+        Method method = null;
+        for (Class<?> clazz = pageClass; method == null && clazz != null; clazz = clazz.getSuperclass()) {
+            List<Method> methods = Arrays.stream(clazz.getDeclaredMethods())
+                    .filter(part -> part.getName().equals(action))
+                    .collect(Collectors.toList());
+
+            if (methods.size() != 0) {
+                for (Method m : methods) {
+                    boolean found = true;
+                    for (Class<?> e : m.getParameterTypes()) {
+                        if (e != Map.class && e != HttpServletRequest.class) {
+                            found = false;
+                            break;
+                        }
+                    }
+                    if (found) {
+                        method = m;
+                        break;
+                    }
+                }
+            }
+        }
+
+        return method;
+    }
+
+    private void invokeMethod(String action, Object page, Map<String, Object> view, HttpServletRequest request) throws NotFoundException, RedirectException, ServletException {
+        Class<?> pageClass = page.getClass();
+        Method method = findMethod(action, pageClass);
+        if (method == null) {
+            throw new NotFoundException();
+        }
+        method.setAccessible(true);
+        try {
+            Class<?>[] methodParameters = method.getParameterTypes();
+            List<Object> actualParameters = new ArrayList<>();
+            for (Class<?> e : methodParameters) {
+                if (e == Map.class) {
+                    actualParameters.add(view);
+                } else if (e == HttpServletRequest.class) {
+                    actualParameters.add(request);
+                }
+            }
+            method.invoke(page, actualParameters.toArray());
         } catch (IllegalAccessException e) {
-            throw new ServletException("Unable to run action [pageClass=" + pageClass + ", method=" + method + "].", e);
+            throw new ServletException("Can't invoke action method [pageClass=" + pageClass + ", method=" + method + "]");
         } catch (InvocationTargetException e) {
             Throwable cause = e.getCause();
             if (cause instanceof RedirectException) {
-                RedirectException redirectException = (RedirectException) cause;
-                response.sendRedirect(redirectException.getLocation());
-                return;
+                throw (RedirectException) cause;
             } else if (cause instanceof ValidationException) {
                 ValidationException validationException = (ValidationException) cause;
 
@@ -168,25 +211,8 @@ public class FrontServlet extends HttpServlet {
                     }
                 }
             } else {
-                throw new ServletException("Unable to run action [pageClass=" + pageClass + ", method=" + method + "].", e);
+                throw new ServletException("Can't invoke action method [pageClass=" + pageClass + ", method=" + method + "]", cause);
             }
-        }
-
-        Template template = newTemplate(pageClass.getSimpleName() + ".ftlh");
-
-        response.setContentType("text/html");
-        response.setCharacterEncoding(StandardCharsets.UTF_8.name());
-        try {
-            template.process(view, response.getWriter());
-        } catch (TemplateException e) {
-            throw new ServletException("Can't render template [pageClass=" + pageClass + ", method=" + method + "].", e);
-        }
-    }
-
-    private void putUser(HttpServletRequest request, Map<String, Object> view) {
-        User user = (User) request.getSession().getAttribute("user");
-        if (user != null) {
-            view.put("user", user);
         }
     }
 

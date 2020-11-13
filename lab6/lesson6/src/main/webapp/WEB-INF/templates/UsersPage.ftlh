@@ -10,6 +10,7 @@
                 <th>Id</th>
                 <th>Login</th>
                 <th>Created</th>
+                <th>Email</th>
             </tr>
             </thead>
             <tbody>
@@ -18,6 +19,11 @@
                 <td>${user.id}</td>
                 <td>${user.login}</td>
                 <td>${user.creationTime}</td>
+                <#if user.email != "">
+                    <td>${user.email}</td>
+                <#else>
+                    <td>-</td>
+                </#if>
             </tr>
             </#list>
             </tbody>
