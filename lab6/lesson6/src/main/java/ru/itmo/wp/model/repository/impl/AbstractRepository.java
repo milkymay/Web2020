@@ -7,6 +7,8 @@ import ru.itmo.wp.model.repository.Setter;
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public abstract class AbstractRepository<T> {
@@ -62,6 +64,32 @@ public abstract class AbstractRepository<T> {
         return entities;
     }
 
+    public String generateInsertSQL(T entity, String args) {
+        return "INSERT INTO `" + entity.getClass().getSimpleName() + "`" + args;
+    }
+
+    public String generateSelectSQL(T entity, String args) {
+        return "SELECT * FROM `" + entity.getClass().getSimpleName() + "` WHERE " + args;
+    }
+
     protected abstract T toEntity(ResultSetMetaData metaData, ResultSet resultSet) throws SQLException;
 
+    protected List<T> filter(T entity, Setter<T, PreparedStatement> statementSetter, String SQLRequest) {
+        List<T> entities = new ArrayList<>();
+        try (Connection connection = DATA_SOURCE.getConnection()) {
+            try (PreparedStatement statement = connection.prepareStatement(SQLRequest)) {
+                statementSetter.set(entity, statement);
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    T curEntity;
+                    while ((curEntity = toEntity(statement.getMetaData(), resultSet)) != null) {
+                        entities.add(curEntity);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            throw new RepositoryException("Can't find.", e);
+        }
+        Collections.reverse(entities);
+        return entities;
+    }
 }

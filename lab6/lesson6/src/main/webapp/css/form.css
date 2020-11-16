@@ -48,3 +48,8 @@
     font-size: 0.75rem;
     margin-left: 12rem;
 }
+
+.error {
+    color: var(--error-color);
+    font-size: 0.75rem;
+}

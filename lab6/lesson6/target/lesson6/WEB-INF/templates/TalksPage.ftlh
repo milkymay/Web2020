@@ -3,6 +3,7 @@
 <#-- @ftlvariable name="event" type="ru.itmo.wp.model.domain.event.Event" -->
 <#-- @ftlvariable name="talk" type="ru.itmo.wp.model.domain.talk.Talk" -->
 <#-- @ftlvariable name="talks" type="ru.itmo.wp.model.domain.talk.Talk[]" -->
+<#-- @ftlvariable name="error" type="java.lang.String" -->
 <#import "commons.ftlh" as c>
 
 <@c.page>
@@ -10,11 +11,16 @@
         <input type="hidden" name="action" value="send"/>
         <div class="field">
             <div class="name">
-                <label for="message">Enter your message</label>
+                <label for="text">Enter your message</label>
             </div>
             <div class="value">
-                <input id="message" name="message" value="${message!}"/>
+                <input id="text" name="text" value="${text!}"/>
             </div>
+            <#if error??>
+                <div class="error">
+                    ${error!}
+                </div>
+            </#if>
         </div>
         <div class="field">
             <div class="name">
@@ -33,6 +39,7 @@
         <div class="button-field">
             <input type="submit" value="Send">
         </div>
+
     </form>
 
     <div class="datatable">
@@ -49,7 +56,6 @@
             </thead>
             <tbody>
             <#list talks as talk>
-                <#if  user?? && (user.id = talk.sourceUserId) || (user.id = talk.targetUserId)>
                 <tr>
                     <td>${talk.id}</td>
                     <td>${talk.sourceUserId}</td>
@@ -57,7 +63,6 @@
                     <td>${talk.targetUserId}</td>
                     <td>${talk.creationTime}</td>
                 </tr>
-                </#if>
             </#list>
             </tbody>
         </table>

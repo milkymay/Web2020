@@ -7,4 +7,5 @@ import java.util.List;
 public interface TalkRepository {
     void save(Talk talk);
     List<Talk> findAll();
+    List<Talk> findByTargetOrSourceUserId(long id);
 }

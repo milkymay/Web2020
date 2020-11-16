@@ -40,5 +40,4 @@ public class Event implements Serializable {
     public void setType(EventType type) {
         this.type = type;
     }
-
 }

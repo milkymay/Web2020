@@ -20,7 +20,7 @@ public class EventRepositoryImpl extends AbstractRepository<Event> implements Ev
 
     @Override
     public void save(Event event) {
-        String saveSQLRequest = "INSERT INTO `Event` (`userId`, `type`, `creationTime`) VALUES (?, ?, NOW())";
+        String saveSQLRequest = generateInsertSQL(event, " (`userId`, `type`, `creationTime`) VALUES (?, ?, NOW())");
         super.save(event, saveSQLRequest, this::saveStatementSetter, this::saveResultSetter);
     }
 
@@ -31,7 +31,7 @@ public class EventRepositoryImpl extends AbstractRepository<Event> implements Ev
     public Event find(long id) {
         Event event = new Event();
         event.setId(id);
-        String findSQLRequest = "SELECT * FROM Event WHERE id=?";
+        String findSQLRequest = generateSelectSQL(event, " id=?");
         return super.findBy(event, findSQLRequest, this::findStatementSetter);
     }
 

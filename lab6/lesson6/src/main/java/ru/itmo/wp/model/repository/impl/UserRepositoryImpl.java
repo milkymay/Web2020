@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 
 public class UserRepositoryImpl extends AbstractRepository<UserRepositoryImpl.UserAndPasswordSha> implements UserRepository {
     private final DataSource DATA_SOURCE = DatabaseUtils.getDataSource();
-    private final String saveSQLRequest = "INSERT INTO `User` (`login`, `passwordSha`, `creationTime`, `email`) VALUES (?, ?, NOW(), ?)";
 
     protected static class UserAndPasswordSha {
         private final User user;
@@ -70,6 +69,7 @@ public class UserRepositoryImpl extends AbstractRepository<UserRepositoryImpl.Us
         pair.user.setLogin(loginOrEmail);
         return unwrap(super.findBy(pair, "SELECT * FROM User WHERE (login=? OR email=?)", this::loginOrEmailStatementSetter));
     }
+
 
     private User unwrap(UserAndPasswordSha pair) {
         return pair == null ? null : pair.user;
@@ -138,6 +138,7 @@ public class UserRepositoryImpl extends AbstractRepository<UserRepositoryImpl.Us
     @Override
     public void save(User user, String passwordSha) {
         UserAndPasswordSha pair = new UserAndPasswordSha(user, passwordSha);
+        String saveSQLRequest = "INSERT INTO `User` (`login`, `passwordSha`, `creationTime`, `email`) VALUES (?, ?, NOW(), ?)";
         super.save(pair, saveSQLRequest, this::saveStatementSetter, this::saveResultSetter);
     }
 }

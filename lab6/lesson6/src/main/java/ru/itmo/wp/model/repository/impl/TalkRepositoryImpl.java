@@ -26,13 +26,13 @@ public class TalkRepositoryImpl extends AbstractRepository<Talk> implements Talk
     private Talk find(long id) {
         Talk talk = new Talk();
         talk.setId(id);
-        String findSQLRequest = "SELECT * FROM Talk WHERE id=?";
+        String findSQLRequest = generateSelectSQL(talk, " id=?");
         return super.findBy(talk, findSQLRequest, this::findStatementSetter);
     }
 
     @Override
     public void save(Talk talk) {
-        String saveSQLRequest = "INSERT INTO `Talk` (`sourceUserId`, `targetUserId`, `text`, `creationTime`) VALUES (?, ?, ?, NOW())";
+        String saveSQLRequest = generateInsertSQL(talk, " (`sourceUserId`, `targetUserId`, `text`, `creationTime`) VALUES (?, ?, ?, NOW())");
         super.save(talk, saveSQLRequest, this::saveStatementSetter, this::saveResultSetter);
     }
 
@@ -70,5 +70,17 @@ public class TalkRepositoryImpl extends AbstractRepository<Talk> implements Talk
     @Override
     public List<Talk> findAll() {
         return super.findAll("SELECT * FROM Talk ORDER BY id DESC");
+    }
+
+    private void targetOrSourceUserIdStatementSetter(Talk talk, PreparedStatement preparedStatement) throws SQLException {
+        preparedStatement.setLong(1, talk.getSourceUserId());
+        preparedStatement.setLong(2, talk.getSourceUserId());
+    }
+
+    @Override
+    public List<Talk> findByTargetOrSourceUserId(long userId) {
+        Talk talk = new Talk();
+        talk.setSourceUserId(userId);
+        return super.filter(talk, this::targetOrSourceUserIdStatementSetter, generateSelectSQL(talk, " (sourceUserId=? OR targetUserId=?)"));
     }
 }
