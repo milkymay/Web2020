@@ -173,7 +173,6 @@ public class FrontServlet extends HttpServlet {
                 return;
             } else if (cause instanceof ValidationException) {
                 ValidationException validationException = (ValidationException) cause;
-
                 view.put("error", validationException.getMessage());
                 for (Map.Entry<String, String[]> param : request.getParameterMap().entrySet()) {
                     String key = param.getKey();
