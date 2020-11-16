@@ -8,8 +8,8 @@ import ru.itmo.wp.web.exception.RedirectException;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
-/** @noinspection unused*/
-public class EnterPage {
+@SuppressWarnings({"unused", "RedundantSuppression"})
+public class EnterPage extends Page {
     private final UserService userService = new UserService();
 
     private void action(HttpServletRequest request, Map<String, Object> view) {
@@ -17,10 +17,11 @@ public class EnterPage {
     }
 
     private void enter(HttpServletRequest request, Map<String, Object> view) throws ValidationException {
-        String login = request.getParameter("login");
+        String loginOrEmail = request.getParameter("loginOrEmail");
         String password = request.getParameter("password");
 
-        User user = userService.validateAndFindByLoginAndPassword(login, password);
+        userService.validateEnter(loginOrEmail, password);
+        User user = userService.findByLoginOrEmailAndPassword(loginOrEmail, password);
         request.getSession().setAttribute("user", user);
         request.getSession().setAttribute("message", "Hello, " + user.getLogin());
 
