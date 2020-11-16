@@ -1,10 +1,12 @@
 <#-- @ftlvariable name="login" type="java.lang.String" -->
 <#-- @ftlvariable name="password" type="java.lang.String" -->
+<#-- @ftlvariable name="passwordConfirmation" type="java.lang.String" -->
+<#-- @ftlvariable name="email" type="java.lang.String" -->
 <#-- @ftlvariable name="error" type="java.lang.String" -->
 <#import "commons.ftlh" as c>
 
 <@c.page>
-    <div class="registration form-box">
+    <div class="form-box">
         <div class="header">Register</div>
         <div class="body">
             <form method="post" action="">
@@ -19,15 +21,32 @@
                 </div>
                 <div class="field">
                     <div class="name">
+                        <label for="email">Email</label>
+                    </div>
+                    <div class="value">
+                        <input id="email" name="email" value="${email!}"/>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="name">
                         <label for="password">Password</label>
                     </div>
                     <div class="value">
                         <input id="password" name="password" type="password" value="${password!}"/>
                     </div>
+                </div><div class="field">
+                    <div class="name">
+                        <label for="passwordConfirmation">PasswordConfirmation</label>
+                    </div>
+                    <div class="value">
+                        <input id="passwordConfirmation" name="passwordConfirmation" type="password" value="${passwordConfirmation!}"/>
+                    </div>
                 </div>
-                <div class="error">
-                    ${error!}
-                </div>
+                <#if error??>
+                    <div class="error">
+                        ${error!}
+                    </div>
+                </#if>
                 <div class="button-field">
                     <input type="submit" value="Register">
                 </div>
@@ -40,12 +59,16 @@
             $(".registration form").submit(function () {
                 const login = $(this).find("input[name='login']").val();
                 const password = $(this).find("input[name='password']").val();
+                const email = $(this).find("input[name='email']").val();
+                const passwordConfirmation = $(this).find("input[name='passwordConfirmation']").val();
                 const $error = $(this).find(".error");
 
                 ajax({
                     action: "register",
                     login: login,
-                    password: password
+                    password: password,
+                    email,
+                    passwordConfirmation
                 }, function (response) {
                     if (response["error"]) {
                         $error.text(response["error"]);
