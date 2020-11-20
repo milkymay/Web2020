@@ -87,6 +87,70 @@ main {
     margin-right: 21rem;
 }
 
+main article .title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #3B5998;
+}
+
+main article .information {
+    font-size: 0.86rem;
+    color: #888888;
+}
+
+main article .body {
+    border-left: 0.3rem solid #AAAAAA;
+    padding-left: 1rem;
+}
+
+main article ul {
+    list-style-type: none;
+    padding: 0 0 0.35rem 0;
+    font-size: 0.8rem;
+    color: #888888;
+}
+
+main article li {
+    background: url(https://sta.codeforces.com/s/38932/images/icons/paperclip-16x16.png) 0 0 no-repeat;
+    background-size: 0.9rem;
+    padding-left: 1.2rem;
+    margin-top: 0.3rem;
+}
+
+main article .footer {
+    height: 2.5rem;
+    border: 0.08rem solid #BBBBBB;
+    border-radius: var(--border-radius);
+    width: inherit;
+}
+
+main article .footer div {
+    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+    vertical-align: middle;
+}
+
+main article .footer .left {
+    float: left;
+    font-size: 1rem;
+    color: #008000;
+    font-weight: bold;
+}
+
+main article .footer .left img {
+    vertical-align: middle;
+    height: 1.3rem;
+}
+
+main article .footer .right {
+    float: right;
+}
+
+main article .footer .right img {
+    vertical-align: top;
+    size: 1rem;
+    padding: 0 0.1rem 0.0rem 0.1rem;
+}
+
 footer {
     margin-top: 2rem;
     border-top: 1px solid var(--border-color);

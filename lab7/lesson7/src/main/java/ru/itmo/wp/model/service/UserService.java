@@ -55,6 +55,10 @@ public class UserService {
         }
     }
 
+    public User find(long id) {
+        return userRepository.find(id);
+    }
+
     public long findCount() {
         return userRepository.findCount();
     }

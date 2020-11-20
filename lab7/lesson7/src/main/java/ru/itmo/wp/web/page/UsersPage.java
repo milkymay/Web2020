@@ -1,6 +1,7 @@
 package ru.itmo.wp.web.page;
 
 import ru.itmo.wp.model.service.UserService;
+import ru.itmo.wp.web.annotation.Json;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
@@ -11,5 +12,10 @@ public class UsersPage extends Page {
 
     private void action(HttpServletRequest request, Map<String, Object> view) {
         view.put("users", userService.findAll());
+    }
+
+    @Json
+    private void findLoginByUserId(HttpServletRequest request, Map<String, Object> view) {
+        view.put("author", userService.find(Long.parseLong(request.getParameter("userId"))));
     }
 }

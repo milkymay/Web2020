@@ -70,11 +70,9 @@ public class UserRepositoryImpl extends AbstractRepository<UserRepositoryImpl.Us
         return unwrap(super.findBy(pair, "SELECT * FROM User WHERE (login=? OR email=?)", this::loginOrEmailStatementSetter));
     }
 
-
     private User unwrap(UserAndPasswordSha pair) {
         return pair == null ? null : pair.user;
     }
-
 
     @Override
     public long findCount() {

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 /** @noinspection unused*/
-public class LogoutPage {
+public class LogoutPage extends Page {
     private void action(HttpServletRequest request, Map<String, Object> view) {
         request.getSession().removeAttribute("user");
 

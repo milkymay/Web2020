@@ -25,11 +25,9 @@
                         <input id="password" name="password" type="password" value="${password!}"/>
                     </div>
                 </div>
-                <#if error??>
-                    <div class="error">
-                        ${error!}
-                    </div>
-                </#if>
+                <div class="error">
+                    ${error!}
+                </div>
                 <div class="button-field">
                     <input type="submit" value="Enter">
                 </div>
@@ -39,19 +37,15 @@
 
     <script>
         $(function () {
-            $(".registration form").submit(function () {
-                const login = $(this).find("input[name='login']").val();
+            $(".login form").submit(function () {
+                const loginOrEmail = $(this).find("input[name='loginOrEmail']").val();
                 const password = $(this).find("input[name='password']").val();
-                const email = $(this).find("input[name='email']").val();
-                const passwordConfirmation = $(this).find("input[name='passwordConfirmation']").val();
                 const $error = $(this).find(".error");
 
                 ajax({
-                    action: "register",
-                    login: login,
-                    password: password,
-                    email,
-                    passwordConfirmation
+                    action: "enter",
+                    loginOrEmail,
+                    password
                 }, function (response) {
                     if (response["error"]) {
                         $error.text(response["error"]);
