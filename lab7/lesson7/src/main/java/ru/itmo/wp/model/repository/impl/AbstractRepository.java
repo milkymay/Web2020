@@ -6,10 +6,7 @@ import ru.itmo.wp.model.repository.Setter;
 
 import javax.sql.DataSource;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public abstract class AbstractRepository<T> {
     private final DataSource DATA_SOURCE = DatabaseUtils.getDataSource();
@@ -43,7 +40,7 @@ public abstract class AbstractRepository<T> {
                 }
             }
         } catch (SQLException e) {
-            throw new RepositoryException("Can't find Event.", e);
+            throw new RepositoryException("Can't find.", e);
         }
     }
 
@@ -91,5 +88,19 @@ public abstract class AbstractRepository<T> {
         }
         Collections.reverse(entities);
         return entities;
+    }
+
+
+    public T update(T entity, Setter<T, PreparedStatement> statementSetter, String SQLRequest) {
+        try (Connection connection = DATA_SOURCE.getConnection()) {
+            try (PreparedStatement statement = connection.prepareStatement(SQLRequest)) {
+                statementSetter.set(entity, statement);
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    return toEntity(statement.getMetaData(), resultSet);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RepositoryException("Can't update.", e);
+        }
     }
 }

@@ -38,7 +38,7 @@
             $noData.find("td").text("Loading...");
 
             ajax({
-                    action: "findAll"
+                    action: "findAllShown"
                 },
                 function (response) {
                     response["articles"].forEach(function (article) {

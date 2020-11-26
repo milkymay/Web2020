@@ -1,31 +1,42 @@
 <#-- @ftlvariable name="users" type="ru.itmo.wp.model.domain.User[]" -->
+<#-- @ftlvariable name="user" type="ru.itmo.wp.model.domain.User" -->
 <#import "commons.ftlh" as c>
 
 <@c.page>
-    <div class="datatable">
+    <#assign isAdmin = false>
+    <#if user?? && user.isAdmin()>
+        <#assign isAdmin = true>
+    </#if>
+    <div class="users datatable">
         <div class="caption">User</div>
         <table>
             <thead>
             <tr>
                 <th>Id</th>
                 <th>Login</th>
-                <th>Created</th>
-                <th>Email</th>
+                <#if isAdmin>
+                    <th>Change admin status</th>
+                </#if>
             </tr>
             </thead>
             <tbody>
-            <#list users as user>
+            <template>
                 <tr>
-                    <td>${user.id}</td>
-                    <td>${user.login}</td>
-                    <td>${user.creationTime}</td>
-                    <#if user.email != "">
-                        <td>${user.email}</td>
-                    <#else>
-                        <td>-</td>
+                    <td class="userId">Loading..</td>
+                    <td class="userLogin">Loading..</td>
+                    <#if isAdmin>
+                        <td class="userAdmin">
+                            <div class="userAdminValue">Loading..</div>
+                            <a href="#" class="changeUserAdmin">
+                                Loading..
+                            </a>
+                        </td>
                     </#if>
                 </tr>
-            </#list>
+            </template>
+            <tr class="noData">
+                <td colspan=3>No Data</td>
+            </tr>
             </tbody>
         </table>
     </div>
@@ -42,20 +53,39 @@
                     response["users"].forEach(function (user) {
                         $noData.hide();
                         const $tr = $($(".users template").prop("content")).clone();
-                        $tr.find(".user_id").text(user["id"]);
-                        $tr.find(".user_login").text(user["login"]);
-                        $tr.find("tr").attr("data-userId", user["id"]);
+                        $tr.find("tr").attr("userId", user["id"]);
+                        $tr.find(".userId").text(user["id"]);
+                        $tr.find(".userLogin").text(user["login"]);
+                        $tr.find(".userAdminValue").text(user["admin"] ? "admin" : "usual");
+                        $tr.find(".changeUserAdmin").text(user["admin"] ? "disable" : "enable");
+                        $tr.find(".changeUserAdmin").attr("isAdmin", user["admin"]);
+                        $tr.find(".changeUserAdmin").attr("id", user["id"]);
                         $(".users tbody").append($tr);
                     });
-                    $(".users tr").click(function () {
+                    $(".userAdmin .changeUserAdmin").click(function () {
+                        $(this).text("Changing..");
+                        $(this).parent().find(".userAdminValue").text("Changing..");
                         ajax({
-                            action: "findUser",
-                            userId: $(this).attr("data-userId")
-                        }, function (response) {
-                            notify(response["user"].creationTime);
-                        })
+                                action: "changeStatus",
+                                userId: $(this).attr("id"),
+                                isAdmin: $(this).attr("isAdmin")
+                            }, function (response) {
+                                let user = response["changedUser"];
+                                let isAdmin = user["admin"];
+                                let id = user["id"];
+                                let userAdminValue = isAdmin ? "admin" : "usual";
+                                let changedUserAdmin = isAdmin ? "disable" : "enable";
+                                let changedUser = $("tr[userId=" + id + "]");
+                                changedUser.find(".userAdminValue").text(userAdminValue);
+                                changedUser.find(".changeUserAdmin").text(changedUserAdmin);
+                                changedUser.find(".changeUserAdmin").attr("isAdmin", isAdmin);
+                            }, "/users"
+                        );
+
                     })
-                });
+
+                }, "/users");
+
         })
     </script>
 </@c.page>

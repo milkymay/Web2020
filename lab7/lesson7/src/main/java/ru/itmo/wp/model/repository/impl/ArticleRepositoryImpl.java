@@ -1,7 +1,6 @@
 package ru.itmo.wp.model.repository.impl;
 
 import ru.itmo.wp.model.domain.Article;
-import ru.itmo.wp.model.domain.User;
 import ru.itmo.wp.model.repository.ArticleRepository;
 
 import java.sql.PreparedStatement;
@@ -9,7 +8,6 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ArticleRepositoryImpl  extends AbstractRepository<Article> implements ArticleRepository {
 
@@ -37,13 +35,49 @@ public class ArticleRepositoryImpl  extends AbstractRepository<Article> implemen
         return super.findBy(article,"SELECT * FROM Article WHERE id=?", this::idStatementSetter);
     }
 
+    private void idStatementSetter(Article article, PreparedStatement preparedStatement) throws SQLException {
+        preparedStatement.setLong(1, article.getId());
+    }
+
     @Override
     public List<Article> findAll() {
         return super.findAll("SELECT * FROM Article ORDER BY id DESC");
     }
 
-    private void idStatementSetter(Article article, PreparedStatement preparedStatement) throws SQLException {
-        preparedStatement.setLong(1, article.getId());
+    private void shownStatementSetter(Article article, PreparedStatement preparedStatement) throws SQLException {
+        preparedStatement.setBoolean(1, article.getHidden());
+    }
+
+    @Override
+    public List<Article> findAllShown() {
+        Article article = new Article();
+        article.setHidden(false);
+        return super.filter(article, this::shownStatementSetter, generateSelectSQL(article, " hidden=?"));
+    }
+
+    private void userIdStatementSetter(Article article, PreparedStatement preparedStatement) throws SQLException {
+        preparedStatement.setLong(1, article.getUserId());
+    }
+
+    @Override
+    public List<Article> findByUserId(long userId) {
+        Article article = new Article();
+        article.setUserId(userId);
+        return super.filter(article, this::userIdStatementSetter, generateSelectSQL(article, " userId=?"));
+    }
+
+    private void hiddenUpdateStatementSetter(Article article, PreparedStatement preparedStatement) throws SQLException {
+        preparedStatement.setBoolean(1, article.getHidden());
+        preparedStatement.setLong(2, article.getId());
+    }
+
+    @Override
+    public Article changeStatus(long id, boolean newStatus) {
+        Article article = new Article();
+        article.setHidden(newStatus);
+        article.setId(id);
+        super.update(article, this::hiddenUpdateStatementSetter, "UPDATE `Article` SET hidden=? WHERE id=?");
+        return article;
     }
 
     @Override
@@ -69,6 +103,9 @@ public class ArticleRepositoryImpl  extends AbstractRepository<Article> implemen
                     break;
                 case "title":
                     article.setTitle(resultSet.getString(i));
+                    break;
+                case "hidden":
+                    article.setHidden(resultSet.getBoolean(i));
                     break;
                 default:
                     // No operations.

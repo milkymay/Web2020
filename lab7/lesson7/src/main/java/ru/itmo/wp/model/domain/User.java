@@ -8,6 +8,11 @@ public class User implements Serializable {
     private String login;
     private Date creationTime;
     private String email = "";
+    private boolean admin = false;
+
+    public boolean isAdmin() {
+        return admin;
+    }
 
     public long getId() {
         return id;
@@ -36,4 +41,8 @@ public class User implements Serializable {
     public String getEmail() { return email; }
 
     public void setEmail(String email) { this.email = email; }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
+    }
 }

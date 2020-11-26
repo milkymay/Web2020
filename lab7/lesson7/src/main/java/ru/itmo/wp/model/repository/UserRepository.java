@@ -1,5 +1,6 @@
 package ru.itmo.wp.model.repository;
 
+import ru.itmo.wp.model.domain.Article;
 import ru.itmo.wp.model.domain.User;
 
 import java.util.List;
@@ -10,7 +11,7 @@ public interface UserRepository {
     User findByLoginOrEmailAndPasswordSha(String login, String passwordSha);
     User findByLoginOrEmail(String loginOrEmail);
     long findCount();
+    User changeStatus(long id, boolean newStatus);
     List<User> findAll();
-
     void save(User user, String passwordSha);
 }

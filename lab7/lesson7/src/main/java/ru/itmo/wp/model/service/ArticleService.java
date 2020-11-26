@@ -22,10 +22,10 @@ public class ArticleService {
         if (Strings.isNullOrEmpty(text)) {
             throw new ValidationException("Article can't be empty");
         }
-        if (30 <= title.length() || title.length() <= 5) {
+        if ((30 <= title.length()) || (title.length() <= 5)) {
             throw new ValidationException("Title can't be shorter than 5 or longer than 30 symbols");
         }
-        if (400 <= text.length() || text.length() <= 10) {
+        if ((400 <= text.length()) || (text.length() <= 10)) {
             throw new ValidationException("Text can't be shorter than 10 or longer than 400 symbols");
         }
     }
@@ -36,5 +36,17 @@ public class ArticleService {
 
     public List<Article> findAll() {
         return articleRepository.findAll();
+    }
+
+    public List<Article> findAllShown() {
+        return articleRepository.findAllShown();
+    }
+
+    public List<Article> findByUserId(long id) {
+        return articleRepository.findByUserId(id);
+    }
+
+    public Article changeStatus(long id, boolean newStatus) {
+        return articleRepository.changeStatus(id, newStatus);
     }
 }

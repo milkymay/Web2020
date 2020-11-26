@@ -3,6 +3,7 @@ package ru.itmo.wp.model.service;
 import com.google.common.base.Strings;
 import com.google.common.hash.Hashing;
 import ru.itmo.wp.model.database.DatabaseUtils;
+import ru.itmo.wp.model.domain.Article;
 import ru.itmo.wp.model.domain.User;
 import ru.itmo.wp.model.exception.RepositoryException;
 import ru.itmo.wp.model.exception.ValidationException;
@@ -88,5 +89,9 @@ public class UserService {
 
     public User findByLoginOrEmail(String loginOrEmail) {
         return userRepository.findByLoginOrEmail(loginOrEmail);
+    }
+
+    public User changeStatus(long id, boolean newStatus) {
+        return userRepository.changeStatus(id, newStatus);
     }
 }

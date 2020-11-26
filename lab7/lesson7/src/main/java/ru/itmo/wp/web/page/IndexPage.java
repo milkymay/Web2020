@@ -19,7 +19,7 @@ public class IndexPage extends Page {
     @Override
     void before(HttpServletRequest request, Map<String, Object> view) {
         super.before(request, view);
-        view.put("articles", articleService.findAll());
+        view.put("articles", articleService.findAllShown());
     }
 
 

@@ -18,7 +18,7 @@
                     <label for="text">Type article text here:</label>
                 </div>
                 <div class="value">
-                    <input id="text" name="text" value="${text!}"/>
+                    <textarea id="text" name="text">${text!}</textarea>
                 </div>
                 <div class="error">
                     ${error!}
@@ -32,7 +32,7 @@
     <script>
         $(function () {
             $(".creation form").submit(function () {
-                const text = $(this).find("input[name='text']").val();
+                const text = $(this).find("textarea[name='text']").val();
                 const title = $(this).find("input[name='title']").val();
                 const $error = $(this).find(".error");
 

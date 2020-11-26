@@ -8,6 +8,11 @@ public class Article {
     private String title;
     private String text;
     private Date creationTime;
+    private boolean hidden = false;
+
+    public void setHidden(boolean hidden) {
+        this.hidden = hidden;
+    }
 
     public void setId(long id) {
         this.id = id;
@@ -47,5 +52,9 @@ public class Article {
 
     public Date getCreationTime() {
         return creationTime;
+    }
+
+    public boolean getHidden() {
+        return hidden;
     }
 }

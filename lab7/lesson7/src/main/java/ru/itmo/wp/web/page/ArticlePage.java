@@ -48,4 +48,26 @@ public class ArticlePage extends Page {
         view.put("articles", articleService.findAll());
     }
 
+    @Json
+    private void findAllShown(Map<String, Object> view) {
+        view.put("articles", articleService.findAllShown());
+    }
+
+    @Json
+    private void changeStatus(HttpServletRequest request, Map<String, Object> view) {
+        User curUser = getUser();
+        if (curUser == null) {
+            request.getSession().setAttribute("message", "You need to be authorized.");
+            throw new RedirectException("/index");
+        }
+        long id = Long.parseLong(request.getParameter("id"));
+        if (curUser.getId() != articleService.find(id).getUserId()) {
+            request.getSession().setAttribute("message", "You must be the author to change the article parameter");
+            throw new RedirectException("/index");
+        }
+        boolean newStatus = request.getParameter("newStatus").equals("Show");
+        Article article = articleService.changeStatus(id, newStatus);
+        view.put("article", article);
+    }
+    
 }

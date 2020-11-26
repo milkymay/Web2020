@@ -28,7 +28,7 @@ public class Page {
     private void putUser(HttpServletRequest request, Map<String, Object> view) {
         User user = (User) request.getSession().getAttribute("user");
         if (user != null) {
-            view.put("user", user);
+            view.put("user", userService.find(user.getId()));
         }
     }
 
@@ -42,6 +42,16 @@ public class Page {
 
     User getUser() {
         return (User) request.getSession().getAttribute("user");
+    }
+
+    User getUpdatedUser(Map<String, Object> view) {
+        User user = getUser();
+        if (user != null) {
+            view.put("user", userService.find(user.getId()));
+            request.getSession().setAttribute("user", userService.find(user.getId()));
+            return userService.find(user.getId());
+        }
+        return null;
     }
 
     void setMessage(String message) {

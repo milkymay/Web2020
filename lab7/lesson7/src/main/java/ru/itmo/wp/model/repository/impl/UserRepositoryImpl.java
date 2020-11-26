@@ -1,6 +1,7 @@
 package ru.itmo.wp.model.repository.impl;
 
 import ru.itmo.wp.model.database.DatabaseUtils;
+import ru.itmo.wp.model.domain.Article;
 import ru.itmo.wp.model.domain.User;
 import ru.itmo.wp.model.exception.RepositoryException;
 import ru.itmo.wp.model.repository.UserRepository;
@@ -88,6 +89,20 @@ public class UserRepositoryImpl extends AbstractRepository<UserRepositoryImpl.Us
         }
     }
 
+    private void hiddenUpdateStatementSetter(UserAndPasswordSha userAndPasswordSha, PreparedStatement preparedStatement) throws SQLException {
+        preparedStatement.setBoolean(1, userAndPasswordSha.user.isAdmin());
+        preparedStatement.setLong(2, userAndPasswordSha.user.getId());
+    }
+
+    @Override
+    public User changeStatus(long id, boolean newStatus) {
+        UserAndPasswordSha userAndPasswordSha = new UserAndPasswordSha(new User(), "");
+        userAndPasswordSha.user.setAdmin(newStatus);
+        userAndPasswordSha.user.setId(id);
+        super.update(userAndPasswordSha, this::hiddenUpdateStatementSetter, "UPDATE `User` SET admin=? WHERE id=?");
+        return unwrap(userAndPasswordSha);
+    }
+
     @Override
     public List<User> findAll() {
         return super.findAll("SELECT * FROM User ORDER BY id DESC").stream().map(a -> a.user).collect(Collectors.toList());
@@ -112,6 +127,9 @@ public class UserRepositoryImpl extends AbstractRepository<UserRepositoryImpl.Us
                     break;
                 case "email":
                     pair.user.setEmail(resultSet.getString(i));
+                    break;
+                case "admin":
+                    pair.user.setAdmin(resultSet.getBoolean(i));
                     break;
                 default:
                     // No operations.
