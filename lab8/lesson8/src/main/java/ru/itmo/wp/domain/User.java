@@ -1,5 +1,6 @@
 package ru.itmo.wp.domain;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -24,6 +25,22 @@ public class User {
 
     @CreationTimestamp
     private Date creationTime;
+
+    @NotNull
+    @ColumnDefault("false")
+    private boolean disabled;
+
+    public boolean getDisabled() {
+        return disabled;
+    }
+
+    public boolean isDisabled() {
+        return disabled;
+    }
+
+    public void setDisabled(boolean disabled) {
+        this.disabled = disabled;
+    }
 
     public long getId() {
         return id;

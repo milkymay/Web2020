@@ -27,7 +27,10 @@ public class EnterPage extends Page {
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
-        binder.addValidators(userCredentialsEnterValidator);
+        if (binder.getTarget() == null) return;
+        if (userCredentialsEnterValidator.supports(binder.getTarget().getClass())) {
+            binder.addValidators(userCredentialsEnterValidator);
+        }
     }
 
     @GetMapping("/enter")
