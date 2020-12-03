@@ -15,6 +15,11 @@ main article .information {
     color: #888;
 }
 
+main article .tags {
+    font-size: 0.85rem;
+    color: #3C7BBA;
+}
+
 main article .body {
     border-left: 4px solid var(--border-color);
     padding-left: 0.75rem;

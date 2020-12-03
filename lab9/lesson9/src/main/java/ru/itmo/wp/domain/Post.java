@@ -8,8 +8,11 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
-/** @noinspection unused*/
+/**
+ * @noinspection unused
+ */
 @Entity
 @Table
 public class Post {
@@ -38,6 +41,22 @@ public class Post {
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     @OrderBy("creationTime desc")
     private List<Comment> comments;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @OrderBy("name asc")
+    @JoinTable(name = "post_tag",
+            joinColumns = @JoinColumn(name = "post_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id")
+    )
+    private Set<Tag> tags;
+
+    public Set<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<Tag> tags) {
+        this.tags = tags;
+    }
 
     public long getId() {
         return id;

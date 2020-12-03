@@ -3,22 +3,29 @@ package ru.itmo.wp.service;
 import org.springframework.stereotype.Service;
 import ru.itmo.wp.domain.Post;
 import ru.itmo.wp.domain.Role;
+import ru.itmo.wp.domain.Tag;
 import ru.itmo.wp.domain.User;
+import ru.itmo.wp.form.PostForm;
 import ru.itmo.wp.form.UserCredentials;
 import ru.itmo.wp.repository.RoleRepository;
+import ru.itmo.wp.repository.TagRepository;
 import ru.itmo.wp.repository.UserRepository;
 
-import java.util.List;
+import java.util.*;
 
 @Service
 public class UserService {
     private final UserRepository userRepository;
+    private final TagRepository tagRepository;
 
-    /** @noinspection FieldCanBeLocal, unused */
+    /**
+     * @noinspection FieldCanBeLocal, unused
+     */
     private final RoleRepository roleRepository;
 
-    public UserService(UserRepository userRepository, RoleRepository roleRepository) {
+    public UserService(UserRepository userRepository, TagRepository tagRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
+        this.tagRepository = tagRepository;
 
         this.roleRepository = roleRepository;
         for (Role.Name name : Role.Name.values()) {
@@ -52,7 +59,21 @@ public class UserService {
         return userRepository.findAllByOrderByIdDesc();
     }
 
-    public void writePost(User user, Post post) {
+    public void writePost(User user, PostForm postForm) {
+        Post post = new Post();
+        post.setTitle(postForm.getTitle());
+        post.setText(postForm.getText());
+        Set<Tag> tags = new HashSet<>();
+        Arrays.stream(postForm.getTags().split("\\s+")).forEach(el -> {
+            Tag tag = tagRepository.findByName(el);
+            if (tag == null) {
+                tag = new Tag();
+                tag.setName(el);
+                tag = tagRepository.save(tag);
+            }
+            tags.add(tag);
+        });
+        post.setTags(tags);
         user.addPost(post);
         userRepository.save(user);
     }

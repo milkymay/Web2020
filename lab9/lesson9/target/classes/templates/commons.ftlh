@@ -93,6 +93,17 @@
         <a href="post/${post.id}" style="text-decoration: none">
             <div class="title">${post.title}</div>
         </a>
+        <#if post.tags?has_content>
+            <div>
+                <#list post.tags as tag>
+                    <a href="" style="text-decoration: none">
+                        <span class="tags">
+                            ${tag.name}${tag?has_next?string(",", "")}
+                        </span>
+                    </a>
+                </#list>
+            </div>
+        </#if>
         <div class="information">By ${post.user.login}, ${post.creationTime}</div>
         <div class="body">${post.text}</div>
         <ul class="attachment">
