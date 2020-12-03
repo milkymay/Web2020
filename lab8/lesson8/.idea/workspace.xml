@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0dd27926-ae50-4ac5-b2dc-68f6bfffecfa" name="Default Changelist" comment="" />
+    <list default="true" id="0dd27926-ae50-4ac5-b2dc-68f6bfffecfa" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab9/lesson9/src/main/java/ru/itmo/wp/controller/PostPage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab9/lesson9/src/main/java/ru/itmo/wp/controller/exceptions/PostNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab9/lesson9/src/main/java/ru/itmo/wp/domain/Comment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab9/lesson9/src/main/java/ru/itmo/wp/form/PostForm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab9/lesson9/src/main/java/ru/itmo/wp/form/validator/PostValidator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab9/lesson9/src/main/java/ru/itmo/wp/repository/CommentRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab9/lesson9/src/main/java/ru/itmo/wp/service/CommentService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab9/lesson9/src/main/resources/templates/PostPage.ftlh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab9/lesson9/src/main/java/ru/itmo/wp/domain/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../lab9/lesson9/src/main/java/ru/itmo/wp/domain/Post.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab9/lesson9/src/main/java/ru/itmo/wp/service/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../lab9/lesson9/src/main/java/ru/itmo/wp/service/PostService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab9/lesson9/target/classes/ru/itmo/wp/service/PostService.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../lab9/lesson9/target/classes/ru/itmo/wp/service/PostService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab9/lesson9/wp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../../lab9/lesson9/wp.iml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -28,7 +43,11 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
   <component name="ProjectId" id="1kpvzi37Zq51GLL8OCQ6Ndxzj4r" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -42,9 +61,10 @@
     <property name="RequestMappingsPanelWidth0" value="75" />
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/templates" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../lab7/lesson7" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -104,6 +124,7 @@
       <updated>1606410612002</updated>
       <workItem from="1606410615154" duration="13743000" />
       <workItem from="1606472599909" duration="4406000" />
+      <workItem from="1607009572352" duration="65000" />
     </task>
     <servers />
   </component>
@@ -123,10 +144,10 @@
       <screen x="1920" y="-243" width="1632" height="960" />
     </state>
     <state x="2319" y="-243" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1280.680/1920.-243.1632.960@1920.-243.1632.960" timestamp="1606414198355" />
-    <state x="420" y="97" key="FileChooserDialogImpl" timestamp="1606675967583">
+    <state x="420" y="97" key="FileChooserDialogImpl" timestamp="1607009636413">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="420" y="97" key="FileChooserDialogImpl/0.0.1280.680/1920.-243.1632.960@0.0.1280.680" timestamp="1606675967583" />
+    <state x="420" y="97" key="FileChooserDialogImpl/0.0.1280.680/1920.-243.1632.960@0.0.1280.680" timestamp="1607009636413" />
     <state width="1235" height="242" key="GridCell.Tab.0.bottom" timestamp="1606675979892">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -199,9 +220,10 @@
       <screen x="1920" y="-243" width="1632" height="960" />
     </state>
     <state x="2479" y="-142" key="refactoring.ChangeSignatureDialog/0.0.1280.680/1920.-243.1632.960@1920.-243.1632.960" timestamp="1606416718855" />
-    <state x="491" y="195" width="725" height="650" key="search.everywhere.popup" timestamp="1606484353676">
-      <screen x="0" y="0" width="1707" height="920" />
+    <state x="368" y="144" width="693" height="481" key="search.everywhere.popup" timestamp="1607009603608">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
+    <state x="368" y="144" width="693" height="481" key="search.everywhere.popup/0.0.1280.680/1920.-243.1632.960@0.0.1280.680" timestamp="1607009603608" />
     <state x="2389" y="-38" width="693" height="678" key="search.everywhere.popup/0.0.1280.680/1920.-243.1632.960@1920.-243.1632.960" timestamp="1606425811709" />
     <state x="491" y="195" width="725" height="650" key="search.everywhere.popup/0.0.1707.920@0.0.1707.920" timestamp="1606484353676" />
   </component>

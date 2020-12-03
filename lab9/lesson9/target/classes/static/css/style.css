@@ -87,6 +87,10 @@ main {
     margin-right: 21rem;
 }
 
+main .commentSection {
+    padding-bottom: 0.5rem;
+}
+
 footer {
     margin-top: 2rem;
     border-top: 1px solid var(--border-color);
@@ -137,4 +141,9 @@ aside section .footer a:after {
     border: 1px solid var(--message-border-color);
     background-color: var(--message-background-color);
     text-align: center;
+}
+
+.error {
+    color: var(--error-color);
+    font-size: 0.85rem;
 }
