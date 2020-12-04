@@ -4,9 +4,9 @@
 <@c.page>
     <#if post??>
         <@c.post post/>
-        <#if userId??>
-            <div class="commentSection">
-                <div class="header">Comment section</div>
+        <div class="commentSection">
+            <div class="header" style="font-weight: bold; color: cornflowerblue">Comment section</div>
+            <#if userId??>
                 <div class="body">
                     <form method="post" action="/post/${post.id}">
                         <div class="field">
@@ -23,13 +23,13 @@
                         </div>
                     </form>
                 </div>
-            </div>
-        </#if>
-        <#if post.comments?has_content>
-            <#list post.comments as comment>
-                <div>${comment.user.login}: ${comment.text}</div>
-            </#list>
-        </#if>
+            </#if>
+            <#if post.comments?has_content>
+                <#list post.comments as comment>
+                    <div><a style="font-style: italic">${comment.user.login}:</a> ${comment.text}</div>
+                </#list>
+            </#if>
+        </div>
     <#else>
         <td class="NoSuchPost">No such post</td>
     </#if>

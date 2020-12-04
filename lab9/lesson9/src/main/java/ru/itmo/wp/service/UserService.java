@@ -59,22 +59,4 @@ public class UserService {
         return userRepository.findAllByOrderByIdDesc();
     }
 
-    public void writePost(User user, PostForm postForm) {
-        Post post = new Post();
-        post.setTitle(postForm.getTitle());
-        post.setText(postForm.getText());
-        Set<Tag> tags = new HashSet<>();
-        Arrays.stream(postForm.getTags().split("\\s+")).forEach(el -> {
-            Tag tag = tagRepository.findByName(el);
-            if (tag == null) {
-                tag = new Tag();
-                tag.setName(el);
-                tag = tagRepository.save(tag);
-            }
-            tags.add(tag);
-        });
-        post.setTags(tags);
-        user.addPost(post);
-        userRepository.save(user);
-    }
 }

@@ -1,5 +1,6 @@
 package ru.itmo.wp.domain;
 
+import net.bytebuddy.build.HashCodeAndEqualsPlugin;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
+import java.util.SortedSet;
 
 /**
  * @noinspection unused
@@ -46,15 +48,14 @@ public class Post {
     @OrderBy("name asc")
     @JoinTable(name = "post_tag",
             joinColumns = @JoinColumn(name = "post_id"),
-            inverseJoinColumns = @JoinColumn(name = "tag_id")
-    )
-    private Set<Tag> tags;
+            inverseJoinColumns = @JoinColumn(name = "tag_id"))
+    private SortedSet<Tag> tags;
 
     public Set<Tag> getTags() {
         return tags;
     }
 
-    public void setTags(Set<Tag> tags) {
+    public void setTags(SortedSet<Tag> tags) {
         this.tags = tags;
     }
 

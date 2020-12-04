@@ -8,7 +8,7 @@ import javax.validation.constraints.Size;
 /** @noinspection unused*/
 @Entity
 @Table
-public class Tag {
+public class Tag implements Comparable<Tag> {
     @Id
     @GeneratedValue
     private long id;
@@ -35,4 +35,8 @@ public class Tag {
         return name;
     }
 
+    @Override
+    public int compareTo(Tag o) {
+        return o.name.compareTo(this.name);
+    }
 }
