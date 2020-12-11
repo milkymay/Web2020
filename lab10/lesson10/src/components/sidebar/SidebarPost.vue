@@ -13,14 +13,14 @@
 </template>
 
 <script>
-export default {
-  name: "SidebarPost",
-  props: ["post"]
-}
+  export default {
+    name: "SidebarPost",
+    props: ["post"]
+  }
 </script>
 
 <style scoped>
-section {
-  margin-bottom: 1rem;
-}
+  section {
+    margin-bottom: 1rem;
+  }
 </style>

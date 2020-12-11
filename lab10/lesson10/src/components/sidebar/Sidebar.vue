@@ -5,17 +5,15 @@
 </template>
 
 <script>
-import SidebarPost from "@/components/sidebar/SidebarPost";
-
-export default {
-  name: "Sidebar",
-  components: {
-    SidebarPost
-  },
-  props: ["posts"]
-}
+  import SidebarPost from "@/components/sidebar/SidebarPost";
+  export default {
+    name: "Sidebar",
+    components: {
+      SidebarPost
+    },
+    props: ["posts"]
+  }
 </script>
 
 <style scoped>
-
 </style>

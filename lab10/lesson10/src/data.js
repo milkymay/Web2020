@@ -6,8 +6,6 @@ export default {
         11: {id: 11, login: "andrewzta", name: "Andrew Stankevich", admin: false}
     },
 
-    usersCount: 4,
-
     userId: null,
 
     posts: {
@@ -48,8 +46,6 @@ export default {
             text: "Participants are invited to achieve progress in solving an unusual problem. VK Cup teams which were advanced to the Round 2 (and didn't advance to the Round 3) will take part in VK Cup 2029 - Wild-card Round 2 officially. In addition, this round will be open to the public for unofficial participation for everybody. Registration will be open for the whole round duration."
         }
     },
-
-    postsCount: 6,
 
     comments: {
         1: {id: 1, userId: 1, postId: 4, text: "Thanks, tourist"},
