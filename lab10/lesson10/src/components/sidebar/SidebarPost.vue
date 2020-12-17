@@ -22,5 +22,6 @@
 <style scoped>
   section {
     margin-bottom: 1rem;
+    overflow: hidden;
   }
 </style>
