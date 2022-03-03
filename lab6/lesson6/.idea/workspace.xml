@@ -5,10 +5,70 @@
       <artifact name="lesson6:war exploded" />
     </artifacts-to-build>
   </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="f3445b21-4a2e-466b-af61-52231556a385" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/backend/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/backend/mvnw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/backend/mvnw.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/backend/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/backend/src/main/java/ru/itmo/wp/WpApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/backend/src/main/java/ru/itmo/wp/controller/ApiController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/backend/src/main/java/ru/itmo/wp/controller/JwtController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/backend/src/main/java/ru/itmo/wp/controller/PostController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/backend/src/main/java/ru/itmo/wp/controller/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/backend/src/main/java/ru/itmo/wp/controller/handler/RestControllerExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/backend/src/main/java/ru/itmo/wp/domain/Post.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/backend/src/main/java/ru/itmo/wp/domain/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/backend/src/main/java/ru/itmo/wp/exception/NoSuchResourceException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/backend/src/main/java/ru/itmo/wp/exception/ValidationException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/backend/src/main/java/ru/itmo/wp/form/UserCredentials.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/backend/src/main/java/ru/itmo/wp/form/validator/UserCredentialsEnterValidator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/backend/src/main/java/ru/itmo/wp/repository/PostRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/backend/src/main/java/ru/itmo/wp/repository/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/backend/src/main/java/ru/itmo/wp/service/JwtService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/backend/src/main/java/ru/itmo/wp/service/PostService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/backend/src/main/java/ru/itmo/wp/service/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/backend/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/backend/src/test/java/ru/itmo/wp/WpApplicationTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/frontend/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/frontend/babel.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/frontend/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/frontend/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/frontend/public/css/article.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/frontend/public/css/datatable.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/frontend/public/css/form.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/frontend/public/css/normalize.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/frontend/public/css/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/frontend/public/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/frontend/public/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/frontend/src/App.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/frontend/src/assets/img/comments_16x16.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/frontend/src/assets/img/date_16x16.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/frontend/src/assets/img/gb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/frontend/src/assets/img/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/frontend/src/assets/img/paperclip-16x16.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/frontend/src/assets/img/ru.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/frontend/src/assets/img/search-16x16.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/frontend/src/assets/img/votedown.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/frontend/src/assets/img/voteup.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/frontend/src/components/Footer.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/frontend/src/components/Header.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/frontend/src/components/Middle.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/frontend/src/components/middle/Enter.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/frontend/src/components/middle/Index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/frontend/src/components/middle/Post.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/frontend/src/components/middle/Register.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/frontend/src/components/middle/User.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/frontend/src/components/middle/Users.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/frontend/src/components/sidebar/Sidebar.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/frontend/src/components/sidebar/SidebarPost.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/frontend/src/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/frontend/vue.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab11/lesson11/scripts/data.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../lab9/lesson9/target/classes/ru/itmo/wp/service/PostService.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../lab9/lesson9/target/classes/ru/itmo/wp/service/PostService.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,13 +115,13 @@
   <component name="ProjectId" id="1japYOoa8IUwDJ3mMpjCtNlDz0O" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="mariadb" />
     <property name="GoToKeyword.includeLibraries" value="false" />
     <property name="GoToNamespace.includeLibraries" value="false" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
@@ -72,6 +132,7 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -100,6 +161,68 @@
       <setting name="configType" value="SPECIFY" />
       <setting name="fixLineNumbers" value="false" />
       <method v="2" />
+    </configuration>
+    <configuration default="true" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" ALTERNATIVE_JRE_ENABLED="false">
+      <deployment />
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="_lesson6" />
+      </server-settings>
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <predefined_log_file id="Tomcat Manager" />
+      <predefined_log_file id="Tomcat Host Manager" />
+      <predefined_log_file id="Tomcat Localhost Access" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="61122" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration name="Tomcat 9.0.38" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.38" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
       <option name="OPEN_IN_BROWSER" value="false" />
@@ -173,68 +296,6 @@
         </option>
       </method>
     </configuration>
-    <configuration default="true" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" ALTERNATIVE_JRE_ENABLED="false">
-      <deployment />
-      <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="_lesson6" />
-      </server-settings>
-      <predefined_log_file enabled="true" id="Tomcat" />
-      <predefined_log_file enabled="true" id="Tomcat Catalina" />
-      <predefined_log_file id="Tomcat Manager" />
-      <predefined_log_file id="Tomcat Host Manager" />
-      <predefined_log_file id="Tomcat Localhost Access" />
-      <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="61122" />
-      </RunnerSettings>
-      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
-        <option name="USE_ENV_VARIABLES" value="true" />
-        <STARTUP>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </STARTUP>
-        <SHUTDOWN>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </SHUTDOWN>
-      </ConfigurationWrapper>
-      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
-        <option name="USE_ENV_VARIABLES" value="true" />
-        <STARTUP>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </STARTUP>
-        <SHUTDOWN>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </SHUTDOWN>
-      </ConfigurationWrapper>
-      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
-        <option name="USE_ENV_VARIABLES" value="true" />
-        <STARTUP>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </STARTUP>
-        <SHUTDOWN>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </SHUTDOWN>
-      </ConfigurationWrapper>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -253,6 +314,7 @@
       </list>
     </option>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -270,11 +332,13 @@
       <workItem from="1605256206590" duration="17945000" />
       <workItem from="1605549391285" duration="155000" />
       <workItem from="1607179890393" duration="845000" />
+      <workItem from="1634216119715" duration="1236000" />
+      <workItem from="1634236616750" duration="591000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
     <state x="2346" y="-118" key="#SQL_Dialects" timestamp="1605191025904">
